@@ -2,9 +2,12 @@ import './App.css';
 import { useState } from 'react';
 import { data } from './data';
 
+
 function App() {
 const [list, setList] = useState(0);
-const {id, thing, image} = data[list];
+const {id, thing, pic} = data[list];
+const [button, setButton] = useState(data)
+
 
 const previousTask = () =>{
 setList ((list =>{
@@ -27,8 +30,11 @@ return list;
 }
 
 const markCompleted = (id) =>{
-
-}
+   console.log(id)
+let goalsCompleted = data.filter(data => data.id !== data.id);
+console.log(goalsCompleted)
+setButton(goalsCompleted)
+} 
 
 return (
 <div>
@@ -40,13 +46,40 @@ return (
    </div>
    <div className='container'>
       <button className='btn' onClick={(previousTask)}>Previous</button>
-      <img src={ image }  width='400px' height='400px' alt="photo" />
+      <img src={ pic }  width='400px' height='400px' alt="pic" />
       <button className='btn' onClick={(nextTask)}>Next</button>
    </div>
 <div className='container'>
    <button className='completed' onClick={()=>markCompleted(id)}>Completed</button>
 </div>
+
 </div>
 )
 }
+
+/*function App(){
+   const [list, setList] = useState(data);
+   console.log(list);
+
+
+
+   return(
+      <div>
+         <div className='container'>
+      <h1>List of { data.length } things I want to do within the next 5 years</h1>
+   </div>
+   {list.map((element => {
+      const {id, thing, image} = element;
+
+      return( 
+         <div>
+            <div className='container' key={id}>
+      <h2>{ id } - { thing } </h2>
+   </div>
+         </div>
+      )
+   }))}
+      </div>
+   )
+}*/
 export default App;
